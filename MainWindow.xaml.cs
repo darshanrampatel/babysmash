@@ -35,7 +35,7 @@ namespace BabySmash
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
-            controller.MouseWheel(this, e);
+            Controller.MouseWheel(this, e);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)

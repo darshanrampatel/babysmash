@@ -35,17 +35,19 @@ namespace BabySmash
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private static Controller instance = new Controller();
+        private static readonly Controller instance = new();
 
+#pragma warning disable IDE1006 // Naming Styles
         public bool isOptionsDialogShown { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
         private bool isDrawing = false;
-        private readonly SpeechSynthesizer objSpeech = new SpeechSynthesizer();
-        private readonly List<MainWindow> windows = new List<MainWindow>();
+        private readonly SpeechSynthesizer objSpeech = new();
+        private readonly List<MainWindow> windows = new();
 
-        private DispatcherTimer timer = new DispatcherTimer();
-        private Queue<Shape> ellipsesQueue = new Queue<Shape>();
-        private Dictionary<string, List<UserControl>> figuresUserControlQueue = new Dictionary<string, List<UserControl>>();
-        private WordFinder wordFinder = new WordFinder("Words.txt");
+        private readonly DispatcherTimer timer = new();
+        private readonly Queue<Shape> ellipsesQueue = new();
+        private readonly Dictionary<string, List<UserControl>> figuresUserControlQueue = new();
+        private readonly WordFinder wordFinder = new("Words.txt");
 
         /// <summary>Prevents a default instance of the Controller class from being created.</summary>
         private Controller() { }
@@ -55,7 +57,9 @@ namespace BabySmash
             get { return instance; }
         }
 
+#pragma warning disable IDE1006 // Naming Styles
         void deployment_UpdateCompleted(object sender, AsyncCompletedEventArgs e)
+#pragma warning restore IDE1006 // Naming Styles
         {
             if (e.Error != null)
             {
@@ -74,7 +78,7 @@ namespace BabySmash
 
             foreach (WinForms.Screen s in WinForms.Screen.AllScreens)
             {
-                MainWindow m = new MainWindow(this)
+                MainWindow m = new(this)
                 {
                     WindowStartupLocation = WindowStartupLocation.Manual,
                     Left = s.WorkingArea.Left,
@@ -111,7 +115,9 @@ namespace BabySmash
 #endif
         }
 
+#pragma warning disable IDE1006 // Naming Styles
         void timer_Tick(object sender, EventArgs e)
+#pragma warning restore IDE1006 // Naming Styles
         {
             if (isOptionsDialogShown)
             {
@@ -141,7 +147,7 @@ namespace BabySmash
             AddFigure(uie, displayChar);
         }
 
-        private char GetDisplayChar(Key key)
+        private static char GetDisplayChar(Key key)
         {
             // If a number on the normal number track is pressed, display the number.
             if (key >= Key.D0 && key <= Key.D9)
@@ -199,7 +205,7 @@ namespace BabySmash
             GetKeyboardState(keyboardState);
 
             uint scanCode = MapVirtualKey((uint)virtualKey, MapType.MAPVK_VK_TO_VSC);
-            StringBuilder stringBuilder = new StringBuilder(2);
+            StringBuilder stringBuilder = new(2);
 
             int result = ToUnicode((uint)virtualKey, scanCode, keyboardState, stringBuilder, stringBuilder.Capacity, 0);
             switch (result)
@@ -248,8 +254,7 @@ namespace BabySmash
                                 new Duration(TimeSpan.FromSeconds(Settings.Default.FadeAfter)), 1, 0);
                 if (Settings.Default.FadeAway) storyboard.Begin(uie);
 
-                IHasFace face = f as IHasFace;
-                if (face != null)
+                if (f is IHasFace face)
                 {
                     face.FaceVisible = Settings.Default.FacesOnShapes ? Visibility.Visible : Visibility.Hidden;
                 }
@@ -267,7 +272,7 @@ namespace BabySmash
             {
                 foreach (MainWindow window in this.windows)
                 {
-                    this.wordFinder.AnimateLettersIntoWord(figuresUserControlQueue[window.Name], lastWord);
+                    WordFinder.AnimateLettersIntoWord(figuresUserControlQueue[window.Name], lastWord);
                 }
 
                 SpeakString(lastWord);
@@ -306,8 +311,8 @@ namespace BabySmash
 
         void HandleMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            UserControl foo = sender as UserControl; //expected this on Sender!
-            if (foo != null)
+            //expected this on Sender!
+            if (sender is UserControl foo)
             {
                 if (e.Delta < 0)
                 {
@@ -322,8 +327,7 @@ namespace BabySmash
 
         void HandleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UserControl f = e.Source as UserControl;
-            if (f != null && f.Opacity > 0.1) //can it be seen? 
+            if (e.Source is UserControl f && f.Opacity > 0.1) //can it be seen? 
             {
                 isDrawing = true; //HACK: This is a cheat to stop the mouse draw action.
                 Animation.ApplyRandomAnimationEffect(f, Duration.Automatic);
@@ -385,21 +389,18 @@ namespace BabySmash
             return key;
         }
 
-        private void PlayLaughter()
-        {
-            Win32Audio.PlayWavResource(Utils.GetRandomSoundFile());
-        }
+        private static void PlayLaughter() => Win32Audio.PlayWavResource(Utils.GetRandomSoundFile());
 
-        private void SpeakString(string s)
+        private static void SpeakString(string s)
         {
-            ThreadedSpeak ts = new ThreadedSpeak(s);
+            ThreadedSpeak ts = new(s);
             ts.Speak();
         }
 
         private class ThreadedSpeak
         {
-            private string Word = null;
-            SpeechSynthesizer SpeechSynth = new SpeechSynthesizer();
+            private readonly string Word = null;
+            readonly SpeechSynthesizer SpeechSynth = new();
             public ThreadedSpeak(string Word)
             {
                 this.Word = Word;
@@ -433,7 +434,7 @@ namespace BabySmash
             }
             public void Speak()
             {
-                Thread oThread = new Thread(new ThreadStart(this.Start));
+                Thread oThread = new(new ThreadStart(this.Start));
                 oThread.Start();
             }
             private void Start()
@@ -496,7 +497,7 @@ namespace BabySmash
             Win32Audio.PlayWavResource("smallbumblebee.wav");
         }
 
-        public void MouseWheel(MainWindow main, MouseWheelEventArgs e)
+        public static void MouseWheel(MainWindow main, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
             {

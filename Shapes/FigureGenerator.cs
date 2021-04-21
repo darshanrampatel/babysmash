@@ -22,8 +22,8 @@ namespace BabySmash
 
     public class FigureGenerator
     {
-        private static readonly List<KeyValuePair<BabySmashShape, BrushControlFunc>> hashTableOfFigureGenerators = new List<KeyValuePair<BabySmashShape, BrushControlFunc>>
-             {
+        private static readonly List<KeyValuePair<BabySmashShape, BrushControlFunc>> hashTableOfFigureGenerators = new()
+        {
                      new KeyValuePair<BabySmashShape, BrushControlFunc>(BabySmashShape.Circle, x => new CoolCircle(x) ),
                      new KeyValuePair<BabySmashShape, BrushControlFunc>(BabySmashShape.Oval, x => new CoolOval(x) ),
                      new KeyValuePair<BabySmashShape, BrushControlFunc>(BabySmashShape.Rectangle, x => new CoolRectangle(x) ),

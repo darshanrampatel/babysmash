@@ -73,7 +73,7 @@
 
             for (double i = 0; i < total; i += step)
             {
-                LinearDoubleKeyFrame frame = new LinearDoubleKeyFrame();
+                LinearDoubleKeyFrame frame = new();
                 frame.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(i));
                 frame.Value = equation(i, from, to - from, total);
 
@@ -81,7 +81,7 @@
             }
 
             // always add exact final key frame
-            LinearDoubleKeyFrame finalFrame = new LinearDoubleKeyFrame();
+            LinearDoubleKeyFrame finalFrame = new();
             finalFrame.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(total));
             finalFrame.Value = to;
             animation.KeyFrames.Add(finalFrame);
@@ -111,7 +111,7 @@
         /// <returns></returns>
         public static DoubleAnimationUsingKeyFrames CreateAnimation(TransitionType type, double from, double to, TimeSpan duration, double fps)
         {
-            DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames animation = new();
             FillAnimation(animation, type, from, to, duration, fps);
             return animation;
         }

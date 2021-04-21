@@ -18,7 +18,7 @@ namespace BabySmash
 
         private bool wordsReady;
 
-        private HashSet<string> words = new HashSet<string>();
+        private readonly HashSet<string> words = new();
 
         public WordFinder(string wordsFilePath)
         {
@@ -35,11 +35,11 @@ namespace BabySmash
             }
 
             // Load up the string dictionary in the background.
-            Thread t = new Thread(() =>
+            Thread t = new(() =>
             {
                 // Read through the word file and create a hashtable entry for each one with some 
                 // further parsed word data (such as various game scores, etc)
-                StreamReader sr = new StreamReader(wordsFilePath);
+                StreamReader sr = new(wordsFilePath);
                 string s = sr.ReadLine();
                 while (s != null)
                 {
@@ -79,8 +79,7 @@ namespace BabySmash
             int lowestIndexToCheck = Math.Max(0, figuresPos - MaximumWordLength);
             while (figuresPos >= lowestIndexToCheck)
             {
-                var lastFigure = figuresQueue[figuresPos] as CoolLetter;
-                if (lastFigure == null)
+                if (figuresQueue[figuresPos] is not CoolLetter lastFigure)
                 {
                     // If we encounter a non-letter, move on with the best word so far (if any).
                     // IE typing "o [bracket] p e n" can match word "pen" but not "open" since our
@@ -104,14 +103,14 @@ namespace BabySmash
             return longestWord;
         }
 
-        public void AnimateLettersIntoWord(List<UserControl> figuresQueue, string lastWord)
+        public static void AnimateLettersIntoWord(List<UserControl> figuresQueue, string lastWord)
         {
             // Prepare to animate the letters into their respective positions, on each screen.
-            Duration duration = new Duration(TimeSpan.FromMilliseconds(1200));
+            Duration duration = new(TimeSpan.FromMilliseconds(1200));
             int totalLetters = lastWord.Length;
 
-            Point wordCenter = this.FindWordCenter(figuresQueue, totalLetters);
-            Point wordSize = this.FindWordSize(figuresQueue, totalLetters);
+            Point wordCenter = FindWordCenter(figuresQueue, totalLetters);
+            Point wordSize = FindWordSize(figuresQueue, totalLetters);
             double wordLeftEdge = wordCenter.X - wordSize.X / 2f;
 
             // Figure out where to move each letter used in the word; find the letters used based on
@@ -144,7 +143,7 @@ namespace BabySmash
             }
         }
 
-        private Point FindWordCenter(List<UserControl> letterQueue, int letterCount)
+        private static Point FindWordCenter(List<UserControl> letterQueue, int letterCount)
         {
             // For now, target centering the word at the average position of all its letters.
             var x = (from c in letterQueue select Canvas.GetLeft(c)).Reverse().Take(letterCount).Average();
@@ -152,19 +151,18 @@ namespace BabySmash
             return new Point(x, y);
         }
 
-        private Point FindWordSize(List<UserControl> letterQueue, int letterCount)
+        private static Point FindWordSize(List<UserControl> letterQueue, int letterCount)
         {
             var x = (from c in letterQueue select c.Width).Reverse().Take(letterCount).Sum();
             var y = (from c in letterQueue select c.Height).Reverse().Take(letterCount).Max();
             return new Point(x, y);
         }
 
-        private TranslateTransform FindOrAddTranslationTransform(TransformGroup transformGroup)
+        private static TranslateTransform FindOrAddTranslationTransform(TransformGroup transformGroup)
         {
-            var translationTransform = (from t in transformGroup.Children
-                                        where t is TranslateTransform
-                                        select t).FirstOrDefault() as TranslateTransform;
-            if (translationTransform == null)
+            if ((from t in transformGroup.Children
+                 where t is TranslateTransform
+                 select t).FirstOrDefault() is not TranslateTransform translationTransform)
             {
                 translationTransform = new TranslateTransform();
                 transformGroup.Children.Add(translationTransform);

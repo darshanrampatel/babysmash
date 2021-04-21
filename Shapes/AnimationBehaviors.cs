@@ -396,16 +396,16 @@ namespace AnimationBehaviors
         #endregion
 
         #region Loaded Behaviors Applied
-        private void ApplyFadeIn(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyFadeIn(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0.0, 1.0, duration);
+                DoubleAnimation da = new(0.0, 1.0, duration);
                 fe.BeginAnimation(FrameworkElement.OpacityProperty, da);
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -414,16 +414,16 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyFadeOut(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyFadeOut(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(1.0, 0.0, duration);
+                DoubleAnimation da = new(1.0, 0.0, duration);
                 fe.BeginAnimation(FrameworkElement.OpacityProperty, da);
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -432,11 +432,11 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyZoomIn(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyZoomIn(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0.0, 1.0, duration);
+                DoubleAnimation da = new(0.0, 1.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -445,7 +445,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -458,11 +458,11 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyZoomInSpringy(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyZoomInSpringy(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.1, KeyTime.Paced));
@@ -484,7 +484,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.1, KeyTime.Paced));
@@ -506,17 +506,17 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyZoomInRotate(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyZoomInRotate(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da1 = new DoubleAnimation(0.0, 1.0, duration);
+                DoubleAnimation da1 = new(0.0, 1.0, duration);
                 da1.AccelerationRatio = da1.DecelerationRatio = 0.2;
 
-                DoubleAnimation da2 = new DoubleAnimation(0.0, 360.0, duration);
+                DoubleAnimation da2 = new(0.0, 360.0, duration);
                 da2.AccelerationRatio = da2.DecelerationRatio = 0.2;
 
-                TransformGroup tg = new TransformGroup();
+                TransformGroup tg = new();
                 tg.Children.Add(new ScaleTransform(1, 1));
                 tg.Children.Add(new RotateTransform(0));
 
@@ -530,21 +530,21 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da1 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da1 = new();
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
                 da1.Duration = delay + duration;
                 da1.AccelerationRatio = da1.DecelerationRatio = 0.2;
 
-                DoubleAnimationUsingKeyFrames da2 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da2 = new();
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(360.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
                 da2.Duration = delay + duration;
                 da2.AccelerationRatio = da2.DecelerationRatio = 0.2;
 
-                TransformGroup tg = new TransformGroup();
+                TransformGroup tg = new();
                 tg.Children.Add(new ScaleTransform(1, 1));
                 tg.Children.Add(new RotateTransform(0));
 
@@ -565,7 +565,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(-slidepoint.X, 0, duration);
+                DoubleAnimation da = new(-slidepoint.X, 0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -573,7 +573,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.X, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.X, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -592,7 +592,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(-slidepoint.Y, 0, duration);
+                DoubleAnimation da = new(-slidepoint.Y, 0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -600,7 +600,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.Y, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.Y, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -618,7 +618,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(this.ActualWidth, 0, duration);
+                DoubleAnimation da = new(this.ActualWidth, 0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -626,7 +626,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualWidth, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualWidth, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -644,7 +644,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(this.ActualHeight, 0, duration);
+                DoubleAnimation da = new(this.ActualHeight, 0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -652,7 +652,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualHeight, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualHeight, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -664,11 +664,11 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyScaleInVertically(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyScaleInVertically(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0.0, 1.0, duration);
+                DoubleAnimation da = new(0.0, 1.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -676,7 +676,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -688,11 +688,11 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyScaleInHorizontally(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyScaleInHorizontally(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0.0, 1.0, duration);
+                DoubleAnimation da = new(0.0, 1.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -700,7 +700,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -857,7 +857,7 @@ namespace AnimationBehaviors
         /// <returns></returns>
         private List<FrameworkElement> GetUnloadBehaviorElements()
         {
-            List<FrameworkElement> unloadedBehaviorElements = new List<FrameworkElement>();
+            List<FrameworkElement> unloadedBehaviorElements = new();
 
             GetUnloadBehaviorElementsRecursive(this, unloadedBehaviorElements);
 
@@ -933,7 +933,7 @@ namespace AnimationBehaviors
                 if (dur.TimeSpan > longestUnload)
                     longestUnload = dur.TimeSpan;
             }
-            DispatcherTimer unloadTimer = new DispatcherTimer(longestUnload, DispatcherPriority.Render, HandleUnloadedBehaviorComplete, Dispatcher.CurrentDispatcher);
+            DispatcherTimer unloadTimer = new(longestUnload, DispatcherPriority.Render, HandleUnloadedBehaviorComplete, Dispatcher.CurrentDispatcher);
         }
 
         /// <summary>
@@ -1000,11 +1000,11 @@ namespace AnimationBehaviors
 
         #region UnloadedBehaviors Applied
 
-        private void ApplyZoomOut(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyZoomOut(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(1.0, 0.0, duration);
+                DoubleAnimation da = new(1.0, 0.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -1013,7 +1013,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1026,17 +1026,17 @@ namespace AnimationBehaviors
 
         }
 
-        private void ApplyZoomOutRotate(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyZoomOutRotate(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da1 = new DoubleAnimation(1.0, 0.0, duration);
+                DoubleAnimation da1 = new(1.0, 0.0, duration);
                 da1.AccelerationRatio = da1.DecelerationRatio = 0.2;
 
-                DoubleAnimation da2 = new DoubleAnimation(0.0, -360.0, duration);
+                DoubleAnimation da2 = new(0.0, -360.0, duration);
                 da2.AccelerationRatio = da2.DecelerationRatio = 0.2;
 
-                TransformGroup tg = new TransformGroup();
+                TransformGroup tg = new();
                 tg.Children.Add(new ScaleTransform(1, 1));
                 tg.Children.Add(new RotateTransform(0));
 
@@ -1050,21 +1050,21 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da1 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da1 = new();
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
                 da1.Duration = delay + duration;
                 da1.AccelerationRatio = da1.DecelerationRatio = 0.2;
 
-                DoubleAnimationUsingKeyFrames da2 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da2 = new();
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(-360.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
                 da2.Duration = delay + duration;
                 da2.AccelerationRatio = da2.DecelerationRatio = 0.2;
 
-                TransformGroup tg = new TransformGroup();
+                TransformGroup tg = new();
                 tg.Children.Add(new ScaleTransform(1, 1));
                 tg.Children.Add(new RotateTransform(0));
 
@@ -1086,7 +1086,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0, -slidepoint.X, duration);
+                DoubleAnimation da = new(0, -slidepoint.X, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -1094,7 +1094,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.X, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1113,7 +1113,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0, -slidepoint.Y, duration);
+                DoubleAnimation da = new(0, -slidepoint.Y, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -1121,7 +1121,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(-slidepoint.Y, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1139,7 +1139,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0, this.ActualWidth, duration);
+                DoubleAnimation da = new(0, this.ActualWidth, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -1147,7 +1147,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualWidth, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1165,7 +1165,7 @@ namespace AnimationBehaviors
 
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(0, this.ActualHeight, duration);
+                DoubleAnimation da = new(0, this.ActualHeight, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0, 0);
                 fe.RenderTransform = new TranslateTransform(0, 0);
@@ -1173,7 +1173,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(this.ActualHeight, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1185,11 +1185,11 @@ namespace AnimationBehaviors
             }
         }
 
-        private void ApplyScaleOutVertically(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyScaleOutVertically(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(1.0, 0.0, duration);
+                DoubleAnimation da = new(1.0, 0.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -1197,7 +1197,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1210,11 +1210,11 @@ namespace AnimationBehaviors
 
         }
 
-        private void ApplyScaleOutHorizontally(FrameworkElement fe, Duration duration, Duration delay)
+        private static void ApplyScaleOutHorizontally(FrameworkElement fe, Duration duration, Duration delay)
         {
             if (delay.TimeSpan == TimeSpan.Zero)
             {
-                DoubleAnimation da = new DoubleAnimation(1.0, 0.0, duration);
+                DoubleAnimation da = new(1.0, 0.0, duration);
                 da.AccelerationRatio = da.DecelerationRatio = 0.2;
                 fe.RenderTransformOrigin = new Point(0.5, 0.5);
                 fe.RenderTransform = new ScaleTransform(1, 1);
@@ -1222,7 +1222,7 @@ namespace AnimationBehaviors
             }
             else
             {
-                DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da = new();
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(1.0, KeyTime.FromTimeSpan(delay.TimeSpan)));
                 da.KeyFrames.Add(new LinearDoubleKeyFrame(0.0, KeyTime.FromTimeSpan(delay.TimeSpan + duration.TimeSpan)));
@@ -1397,9 +1397,9 @@ namespace AnimationBehaviors
         #endregion
 
         #region Click Behaviors Applied
-        private void ApplyJiggle(FrameworkElement fe, Duration duration)
+        private static void ApplyJiggle(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(10, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
@@ -1418,9 +1418,9 @@ namespace AnimationBehaviors
             fe.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, da);
         }
 
-        private void ApplyThrob(FrameworkElement fe, Duration duration)
+        private static void ApplyThrob(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1.1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
@@ -1440,9 +1440,9 @@ namespace AnimationBehaviors
             fe.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, da);
         }
 
-        private void ApplyRotate(FrameworkElement fe, Duration duration)
+        private static void ApplyRotate(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(-5, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
@@ -1461,9 +1461,9 @@ namespace AnimationBehaviors
             fe.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, da);
         }
 
-        private void ApplySnap(FrameworkElement fe, Duration duration)
+        private static void ApplySnap(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
@@ -1599,7 +1599,7 @@ namespace AnimationBehaviors
         /// <summary>
         /// this dictionary associates elements with the last known position relative to the host
         /// </summary>
-        private Dictionary<FrameworkElement, Point?> layoutBehaviorElementPosition = new Dictionary<FrameworkElement, Point?>();
+        private readonly Dictionary<FrameworkElement, Point?> layoutBehaviorElementPosition = new();
 
         /// <summary>
         /// we remember how many elements need layout animations so that we can unsubscribe from the LayoutUpdated event when its not needed
@@ -1641,7 +1641,7 @@ namespace AnimationBehaviors
         void OnLayoutUpdated(object sender, EventArgs e)
         {
             //TODO: rewrite this method to clean it up and handle corner cases with layout
-            Dictionary<FrameworkElement, Point> updateDict = new Dictionary<FrameworkElement, Point>();
+            Dictionary<FrameworkElement, Point> updateDict = new();
             foreach (KeyValuePair<FrameworkElement, Point?> pair in layoutBehaviorElementPosition)
             {
                 FrameworkElement fe = pair.Key;
@@ -1685,18 +1685,18 @@ namespace AnimationBehaviors
         #endregion
 
         #region Layout Behaviors Applied
-        private void ApplySmoothLayout(FrameworkElement fe, Point oldpoint, Point newpoint, Duration duration)
+        private static void ApplySmoothLayout(FrameworkElement fe, Point oldpoint, Point newpoint, Duration duration)
         {
             fe.RenderTransform = new TranslateTransform();
-            DoubleAnimation da1 = new DoubleAnimation(oldpoint.X - newpoint.X, 0.0, duration);
+            DoubleAnimation da1 = new(oldpoint.X - newpoint.X, 0.0, duration);
             da1.AccelerationRatio = da1.DecelerationRatio = 0.2;
-            DoubleAnimation da2 = new DoubleAnimation(oldpoint.Y - newpoint.Y, 0.0, duration);
+            DoubleAnimation da2 = new(oldpoint.Y - newpoint.Y, 0.0, duration);
             da2.AccelerationRatio = da2.DecelerationRatio = 0.2;
             fe.RenderTransform.BeginAnimation(TranslateTransform.XProperty, da1);
             fe.RenderTransform.BeginAnimation(TranslateTransform.YProperty, da2);
         }
 
-        private void ApplySpringyLayout(FrameworkElement fe, Point oldpoint, Point newpoint, Duration duration)
+        private static void ApplySpringyLayout(FrameworkElement fe, Point oldpoint, Point newpoint, Duration duration)
         {
             fe.RenderTransform = new TranslateTransform();
             if (oldpoint.X != newpoint.X)
@@ -1704,7 +1704,7 @@ namespace AnimationBehaviors
                 double startx = oldpoint.X - newpoint.X;
                 double dx = -startx;
 
-                DoubleAnimationUsingKeyFrames da1 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da1 = new();
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(startx, KeyTime.Paced));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(startx + dx * 1.25, KeyTime.Paced));
                 da1.KeyFrames.Add(new LinearDoubleKeyFrame(startx + dx * 0.75, KeyTime.Paced));
@@ -1723,7 +1723,7 @@ namespace AnimationBehaviors
                 double starty = oldpoint.Y - newpoint.Y;
                 double dy = -starty;
 
-                DoubleAnimationUsingKeyFrames da2 = new DoubleAnimationUsingKeyFrames();
+                DoubleAnimationUsingKeyFrames da2 = new();
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(starty, KeyTime.Paced));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(starty + dy * 1.25, KeyTime.Paced));
                 da2.KeyFrames.Add(new LinearDoubleKeyFrame(starty + dy * 0.75, KeyTime.Paced));
@@ -1751,7 +1751,7 @@ namespace AnimationBehaviors
         /// <param name="p1"></param>
         /// <param name="p2"></param>
         /// <returns></returns>
-        private bool AreClose(Point p1, Point p2)
+        private static bool AreClose(Point p1, Point p2)
         {
             return (Math.Abs(p1.X - p2.X) < .001 && Math.Abs(p1.Y - p2.Y) < .001);
         }

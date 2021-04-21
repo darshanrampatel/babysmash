@@ -79,7 +79,7 @@ namespace BabySmash
 
         public static void ApplyJiggle(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(10, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
@@ -100,7 +100,7 @@ namespace BabySmash
 
         public static void ApplyThrob(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1.1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
@@ -141,7 +141,7 @@ namespace BabySmash
 
         public static void ApplyRotate(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(-5, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
@@ -162,7 +162,7 @@ namespace BabySmash
 
         public static void ApplySnap(FrameworkElement fe, Duration duration)
         {
-            DoubleAnimationUsingKeyFrames da = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames da = new();
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.Paced));
             da.KeyFrames.Add(new LinearDoubleKeyFrame(1, KeyTime.Paced));

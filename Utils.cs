@@ -9,10 +9,10 @@ namespace BabySmash
     {
         private static readonly Dictionary<Color, string> brushToString;
 
-        private static readonly Random lRandom = new Random(); // BUG BUG: Believe it or not, Random is NOT THREAD SAFE!
+        private static readonly Random lRandom = new(); // BUG BUG: Believe it or not, Random is NOT THREAD SAFE!
 
-        private static readonly FunCursor1 fun1 = new FunCursor1();
-        private static readonly FunCursor2 fun2 = new FunCursor2();
+        private static readonly FunCursor1 fun1 = new();
+        private static readonly FunCursor2 fun2 = new();
 
         private static readonly Color[] someColors;
 
@@ -52,7 +52,7 @@ namespace BabySmash
 
         public static Brush GetGradientBrush(Color color)
         {
-            RadialGradientBrush myBrush = new RadialGradientBrush();
+            RadialGradientBrush myBrush = new();
             myBrush.GradientOrigin = new Point(0.75, 0.25);
             myBrush.GradientStops.Add(new GradientStop(color.LightenOrDarken(50), 0.0));
             myBrush.GradientStops.Add(new GradientStop(color, 0.5));
@@ -62,7 +62,7 @@ namespace BabySmash
 
         public static Color LightenOrDarken(this Color src, sbyte degree)
         {
-            Color ret = new Color();
+            Color ret = new();
             ret.A = src.A;
             ret.R = (byte)Math.Max(Math.Min(src.R + degree, 255), 0);
             ret.G = (byte)Math.Max(Math.Min(src.G + degree, 255), 0);

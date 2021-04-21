@@ -1,100 +1,101 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <OutputType>WinExe</OutputType>
-    <ManifestCertificateThumbprint>E4355A6B46BE61300D217B56C346651E03BEB47F</ManifestCertificateThumbprint>
-    <ManifestKeyFile>private.pfx</ManifestKeyFile>
-    <SignManifests>false</SignManifests>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>App.ico</ApplicationIcon>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>http://www.hanselman.com/BabySmash/</UpdateUrl>
-    <SupportUrl>http://feedback.babysmash.com</SupportUrl>
-    <ProductName>BabySmash!</ProductName>
-    <PublisherName>BabySmash</PublisherName>
-    <ApplicationRevision>99</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Update="System.Core"/>
-    <Reference Include="System.Speech" />
-    <Reference Update="System.Xml.Linq"/>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="private.pfx" />
-    <AppDesigner Include="Properties\" />
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Resources\Strings\ru-RU.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Strings\en-EN.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\babylaugh.wav" />
-    <EmbeddedResource Include="Resources\Sounds\giggle.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\babygigl2.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\laughingmice.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\ccgiggle.wav" />
-    <EmbeddedResource Include="Resources\Sounds\scooby2.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\smallbumblebee.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\falling.wav" />
-    <EmbeddedResource Include="Resources\Sounds\rising.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\EditedJackPlaysBabySmash.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Voices\Female\" />
-    <Folder Include="Resources\Voices\Male\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Words.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.211942">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<LangVersion>Latest</LangVersion>
+		<OutputType>WinExe</OutputType>
+		<ManifestCertificateThumbprint>E4355A6B46BE61300D217B56C346651E03BEB47F</ManifestCertificateThumbprint>
+		<ManifestKeyFile>private.pfx</ManifestKeyFile>
+		<SignManifests>false</SignManifests>
+		<IsWebBootstrapper>false</IsWebBootstrapper>
+		<ApplicationIcon>App.ico</ApplicationIcon>
+		<Install>true</Install>
+		<InstallFrom>Disk</InstallFrom>
+		<UpdateEnabled>true</UpdateEnabled>
+		<UpdateMode>Foreground</UpdateMode>
+		<UpdateInterval>7</UpdateInterval>
+		<UpdateIntervalUnits>Days</UpdateIntervalUnits>
+		<UpdatePeriodically>false</UpdatePeriodically>
+		<UpdateRequired>false</UpdateRequired>
+		<MapFileExtensions>true</MapFileExtensions>
+		<UpdateUrl>http://www.hanselman.com/BabySmash/</UpdateUrl>
+		<SupportUrl>http://feedback.babysmash.com</SupportUrl>
+		<ProductName>BabySmash!</ProductName>
+		<PublisherName>BabySmash</PublisherName>
+		<ApplicationRevision>99</ApplicationRevision>
+		<ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+		<UseApplicationTrust>false</UseApplicationTrust>
+		<PublishWizardCompleted>true</PublishWizardCompleted>
+		<BootstrapperEnabled>true</BootstrapperEnabled>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Update="System.Core"/>
+		<Reference Include="System.Speech" />
+		<Reference Update="System.Xml.Linq"/>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="private.pfx" />
+		<AppDesigner Include="Properties\" />
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Resources\Strings\ru-RU.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\Strings\en-EN.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\babylaugh.wav" />
+		<EmbeddedResource Include="Resources\Sounds\giggle.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\babygigl2.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\laughingmice.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\ccgiggle.wav" />
+		<EmbeddedResource Include="Resources\Sounds\scooby2.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="App.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\smallbumblebee.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\falling.wav" />
+		<EmbeddedResource Include="Resources\Sounds\rising.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Sounds\EditedJackPlaysBabySmash.wav" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Resources\Voices\Female\" />
+		<Folder Include="Resources\Voices\Male\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Words.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.211942">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
 </Project>
